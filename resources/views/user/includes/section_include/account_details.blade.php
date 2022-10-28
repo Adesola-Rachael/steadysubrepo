@@ -3,6 +3,8 @@
         <div class='col-md-12' style='margin-top:25px'>
             @if(Session::has('message'))
             <div class='alert alert-success'>{{ Session::get('message') }}</div>
+            @else
+            
             @endif
             @if(Auth::user()->email_verified_at == null)
             <div class='alert alert-danger'>Please login to your email address to verify your account within the next 24hrs  <a href='/verification_resend' class='btn btn-danger'>Resend</a></div>
@@ -35,18 +37,26 @@
                 <div class="card-body skew-shadow">
                     <template x-if="btn === 'wema'">
                     <div>
-                        <h5 class="text-white mt-2 mb-2 pb-2">
-                            {{ auth()->user()->account_number2}}
-                        </h5>
+                        <p class="text-white mt-2 mb-2 pb-2">
+                            <div class="row">
+                                <div class="me-4 col-sm-6">
+                                    <!-- <p class="text-white text-sm opacity-8 mb-0">Account Name</p> -->
+                                    <h6 class="text-white mb-0"> Account Number  </h6>
+                                </div>
+                                <div class="col-sm-6">
+                                    <h6 class="text-white mb-0"> {{ auth()->user()->account_number2}}</h6>
+                                </div>
+                            </div>
+                        </p>
                         <div class="d-flex">
                             <div class="d-flex">
                                 <div class="row">
                                     <div class="me-4 col-sm-6">
-                                    <p class="text-white text-sm opacity-8 mb-0">Account Name</p>
+                                    <p class="text-white mb-0">Account Name</p>
                                     <h6 class="text-white mb-0"> {{auth()->user()->account_name2 }} </h6>
                                     </div>
                                     <div class="col-sm-6">
-                                    <p class="text-white text-sm opacity-8 mb-0">Bank Name</p>
+                                    <p class="text-white mb-0">Bank Name</p>
                                     <h6 class="text-white mb-0"> {{ auth()->user()->bank_name2 }}</h6>
                                     </div>
                                 </div>
@@ -57,9 +67,17 @@
                     <!-- account 2 -->
                     <template x-if="btn === 'moniepoint'">
                     <div>
-                            <h5 class="text-white mt-2 mb-2 pb-2">
-                                {{ auth()->user()->account_number1}}
-                            </h5>
+                            <p class="text-white mt-2 mb-2 pb-2">
+                                <div class="row">
+                                    <div class="me-4 col-sm-6">
+                                        <!-- <p class="text-white text-sm opacity-8 mb-0">Account Name</p> -->
+                                        <h6 class="text-white mb-0"> Account Number  </h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h6 class="text-white mb-0"> {{ auth()->user()->account_number2}}</h6>
+                                    </div>
+                                </div>
+                            </p>
                             <div class="d-flex">
                                 <div class="d-flex">
                                 <div class="row">
@@ -106,8 +124,8 @@
 
             <div class="widget-content">
 
-                <div class="bills-stats">
-                    <a href='/fund-wallet'><span>Fund Wallet</span></a>
+                <div class="bills-stats text-center" >
+                    <a href='/fund-wallet'  ><span style="width:130px; height:40px; font-size:15px; font-weight:bolder;">Fund Wallet</span></a>
                 </div>
                 <div class="wallet-balance">
                     <p>Wallet Balance</p>
@@ -115,10 +133,7 @@
                         number_format(Auth::user()->balance,2) }}</h5>
                 </div>
                 <br>
-                <div>
-                    <a class='btn btn-info' href='https://wa.me/message/3DWADH3SB7QUA1'>Sell Giftcard</a>
-                    <a class='btn btn-warning' href='https://wa.me/message/3DWADH3SB7QUA1'>Sell BTC</a>
-                </div>
+               
             </div>
 
         </div>

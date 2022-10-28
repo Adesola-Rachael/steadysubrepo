@@ -88,14 +88,18 @@
                               
                                 <div class="form-group row mb-0" style="margin-bottom: 0;">
                                     <div class="col-md-6">
-                                        <label for="pin">Depositor's name</label>
+                                        <label for="">Depositor's name</label>
                                         <div class="input-group">
-                                            <input type="text" id='name' class="form-control " id="name" name="name" placeholder="Enter the Depositor name">
+                                            <input type="text" pattern="[a-zA-Z'-'\s]*"   id='name' class="form-control " id="name" name="name" placeholder="Enter the Depositor name">
                                                                                         </div>
                                         <label for="bank-name">Bank name</label>
                                         <div class="input-group">
-                                            <input type="text" id='bank_name' class="form-control " id="bank-name" name="bank_name" placeholder="Enter the Bank">
-                                                                                        </div>
+                                            <input type="text" id='bank_name' pattern="[a-zA-Z'-'\s]*" class="form-control " name="bank_name" placeholder="Enter the Bank">
+                                        </div>
+                                        <label for="bank-name">Account Number</label>
+                                        <div class="input-group">
+                                            <input type="number" id='account_number'   class="form-control " name="account_number" placeholder="Enter the Bank">
+                                        </div>
                                         <label for="amount">Amount</label>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -132,7 +136,8 @@ $("#manual_funding").on('submit',async function(e) {
     
     fd.append('name', $("#name").val());
     fd.append('bank_name', $("#bank_name").val());
-    fd.append('amount', $("#manualamount").val());
+    fd.append('amount', $("#amount").val());
+    fd.append('account_number', $("#account_number").val());
     
     //
     // var data=$("#manual_funding").serialize();

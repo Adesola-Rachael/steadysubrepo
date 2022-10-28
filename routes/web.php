@@ -51,29 +51,47 @@ Route::get('/referral', [App\Http\Controllers\UserController\Account\ReferralCon
 
 
 // user transaction pin route
-Route::any('/setpin', [App\Http\Controllers\UserController\PinController::class, 'setpin'])->name('setpin');
-Route::any('/storepin', [App\Http\Controllers\UserController\PinController::class, 'storepin'])->name('storepin');
+Route::any('/setpin', [App\Http\Controllers\UserController\Account\PinController::class, 'setpin'])->name('setpin');
+Route::any('/storepin', [App\Http\Controllers\UserController\Account\PinController::class, 'storepin'])->name('storepin');
+// Route::post('/mypin', [App\Http\Controllers\UserController\Account\PinController::class, 'mypin'])->name('mypin');
 
-Route::any('/changepin', [App\Http\Controllers\UserController\PinController::class, 'changepin'])->name('changepin');
-Route::any('/forgetpin', [App\Http\Controllers\UserController\PinController::class, 'forgetpin'])->name('forgetpin');
-Route::any('/pinreset/{slug}', [App\Http\Controllers\UserController\PinController::class, 'pinreset'])->name('pinreset');
-Route::any('/resetpin', [App\Http\Controllers\UserController\PinController::class, 'resetpin'])->name('resetpin');
+Route::post('/changepin', [App\Http\Controllers\UserController\Account\PinController::class, 'changepin'])->name('changepin');
+Route::any('/pin', [App\Http\Controllers\UserController\Account\PinController::class, 'pin'])->name('pin');
 
-// airtime route
-Route::any('/buyairtime', [App\Http\Controllers\UserController\Transaction\AirtimeController::class, 'buyairtime'])->name('buyairtime');
-Route::any('/fetchairtime2', [App\Http\Controllers\UserController\Transaction\AirtimeController::class, 'fetchairtime2'])->name('fetchairtime2');
-Route::any('/getdiscount2', [App\Http\Controllers\UserController\Transaction\AirtimeController::class, 'getdiscount2'])->name('getdiscount2');
-Route::post('/buyairtime2', [App\Http\Controllers\UserController\Transaction\AirtimeController::class, 'buyairtime2'])->name('buyairtime2');
+Route::any('/forgetpin', [App\Http\Controllers\UserController\Account\PinController::class, 'forgetpin'])->name('forgetpin');
+Route::post('/confirmpin', [App\Http\Controllers\UserController\Account\PinController::class, 'confirmpin'])->name('confirmpin');
+Route::any('/pinreset/{slug}', [App\Http\Controllers\UserController\Account\PinController::class, 'pinreset'])->name('pinreset');
+Route::any('/resetpin', [App\Http\Controllers\UserController\Account\Account\PinController::class, 'resetpin'])->name('resetpin');
+
+// get airtime route
+Route::any('/buyairtime', [App\Http\Controllers\UserController\Transaction\AirtimeController::class, 'getbuyairtime'])->name('buyairtime');
+// buy airtime
+Route::post('/postairtime', [App\Http\Controllers\UserController\Transaction\AirtimeController::class, 'buyairtime'])->name('postairtime');
+
+// Route::any('/fetchairtime2', [App\Http\Controllers\UserController\Transaction\AirtimeController::class, 'fetchairtime2'])->name('fetchairtime2');
+// Route::any('/getdiscount2', [App\Http\Controllers\UserController\Transaction\AirtimeController::class, 'getdiscount2'])->name('getdiscount2');
+//Route::post('/buyairtime2', [App\Http\Controllers\UserController\Transaction\AirtimeController::class, 'buyairtime2'])->name('buyairtime2');
 
 // electricity route
 Route::any('/electricity', [App\Http\Controllers\UserController\Transaction\ElectricityController::class, 'electricity'])->name('electricity');
+Route::post('/postelectricity', [App\Http\Controllers\UserController\Transaction\ElectricityController::class, 'postelectricity'])->name('postelectricity');
+Route::any('/electricitydetails', [App\Http\Controllers\UserController\Transaction\ElectricityController::class, 'getElectricityDetails'])->name('electricitydetails');
 
 // buydata route
-Route::any('/buydata', [App\Http\Controllers\UserController\Transaction\DataController::class, 'buydata'])->name('buydata');
-// Cable route
+Route::any('/buydata', [App\Http\Controllers\UserController\Transaction\DataController::class, 'getbuydata'])->name('getbuydata');
+Route::post('/buy_data', [App\Http\Controllers\UserController\Transaction\DataController::class, 'buydata'])->name('buydata');
+Route::post('/dataprice', [App\Http\Controllers\UserController\Transaction\DataController::class, 'dataprice'])->name('dataprice');
+
+// Cable route 
 Route::any('/cable', [App\Http\Controllers\UserController\Transaction\CableController::class, 'cable'])->name('cable');
+Route::any('/cableprices', [App\Http\Controllers\UserController\Transaction\CableController::class, 'getcableprices'])->name('cableprices');
+
+Route::any('/getCableDetails', [App\Http\Controllers\UserController\Transaction\CableController::class, 'getCableDetails'])->name('getCableDetails');
+
 // exam route
 Route::any('/exam', [App\Http\Controllers\UserController\Transaction\ExamController::class, 'exam'])->name('exam');
+Route::any('/examprice', [App\Http\Controllers\UserController\Transaction\ExamController::class, 'Examprices'])->name('examprice');
+Route::post('/buy_pin', [App\Http\Controllers\UserController\Transaction\ExamController::class, 'buy_pin'])->name('buy_pin');
 
 
 

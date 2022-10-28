@@ -23,8 +23,7 @@ class PasswordController extends Controller
 
 
    public function changepassword(Request $request) {
-
-
+    
     $validator = Validator::make($request->all(),[
         'old_password'=>[
             'required', function($attribute, $value, $fail){
@@ -45,7 +44,7 @@ class PasswordController extends Controller
          'new_password.min'=>'New password must have atleast 8 characters',
          'new_password.max'=>'New password must not be greater than 30 characters',
          'confirm_password.required'=>'ReEnter your new password',
-         'confirm_password.same'=>'New password and Confirm new password must match'
+         'confirm_password.same'=>'New password and Confirm password must match'
      ]);
 
     if( !$validator->passes() ){

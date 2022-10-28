@@ -4,7 +4,6 @@
 @endsection
 
 @section('page_name',$pagename)
-
 @section('main_content')
 <div class="col-xl-8 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
     <div class="widget widget-three">
@@ -93,14 +92,6 @@
 
 
 
-@endsection
-
-@section('app_init')
-<script>
-$(document).ready(function() {
-    App.init();
-});
-</script>
 @endsection
 
 @section('custom_script')

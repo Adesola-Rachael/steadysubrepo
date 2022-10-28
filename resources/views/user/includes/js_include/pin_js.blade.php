@@ -1,9 +1,12 @@
+
+@push('script')
+
 <script>
 
 
-$(document).ready(function() {
-    // set pin 
-        
+    $(document).ready(function() {  
+        // set pin 
+
         $("#set_pin").on("submit",async function(e) {
             e.preventDefault()
           
@@ -35,39 +38,53 @@ $(document).ready(function() {
                 $.get("{{ route('forgetpin') }}",function(data) {
                     console.log(data)
                 })
-            })
-            })
-
-
-    // $(document).ready(function() {
-        
-    // $("#set_pin").on("submit",async function(e) {
-    //     e.preventDefault()
-      
-    //     value = [$("#current_pin").val(), $("#new_pin").val() ]
-    //     if($("#current_pin").val().length !== 4 ||  $("#new_pin").val().length !== 4 ) {
-    //         Swal.fire('Opps','Pin must be four digit','error')
-    //     } 
-    //     else {
-    //     $.get("{{ route('changepin') }}?value="+value, function(data) {
-    //         if(data == 'not_matched') {
-    //             Swal.fire("Incorrect Pin",'Pin not correct','error')
-    //         }
-           
-    //         else {
-    //             Swal.fire('Pin changed!','Pin changed successfully','success')
-    //             window.location.reload()
-    //         }
-    //     })
-    //     }
-      
-       
-    // })
-    // $("#forgot_pin").on('click',function() {
-    //         Swal.fire("Confirm","Are you sure you want to reset pin",'info')
-    //         $.get("{{ route('forgetpin') }}",function(data) {
-    //             console.log(data)
-    //         })
-    //     })
-    //     })
+        })
+    })
 </script>
+
+<script>
+    $(document).ready(function (){
+        confirmpin();
+        function confirmpin(){
+            $('#confirm_transaction_pin').on("submit",async function(e) {
+            e.preventDefault();     
+
+                    console.log($('#first').val());
+                    console.log($('#second').val());
+                    console.log($('#third').val());
+                    console.log($('#fourth').val());
+
+
+            $.ajax({
+            type: 'POST',
+            data:{
+                    'first':$('#first').val(),
+                    'second':$('#second').val(),
+                    'third':$('#third').val(),
+                    'fourth':$('#fourth').val(),
+                    "_token": "{{ csrf_token() }}",
+                },
+            url: '/confirmpin',
+            }).done(function(data) {
+                if(data==true){
+                    $("#pinconfirm").modal('hide')
+                    swal.showLoading()
+
+                    buy()
+
+                }
+                else{
+                    swal.fire('Error!', 'Your Pin Is Incorrect')
+                    $("#pinconfirm").modal('hide')
+
+
+                }
+               
+            })
+        })
+        }
+        
+    })
+</script>
+    
+@endpush

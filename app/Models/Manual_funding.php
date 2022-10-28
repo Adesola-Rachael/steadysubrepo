@@ -16,7 +16,8 @@ class Manual_funding extends Model
         'user_id',
         'amount',
         'bank_name',
-        'account_name'
+        'account_name',
+        'account_number'
         
     ];
 

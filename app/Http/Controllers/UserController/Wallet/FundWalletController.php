@@ -29,6 +29,7 @@ class FundWalletController extends Controller
  
         Manual_funding::create([
             'account_name' => $request->name,
+            'account_number' => $request->account_number,
             'bank_name' => $request->bank_name,
             'amount' => $request->amount,
             'user_id' => Auth::user()->id

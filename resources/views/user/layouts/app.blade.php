@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('superasset/plugins/table/datatable/dt-global_style.css')}}">
     
       <!-- welwelwel -->
-      @livewireStyles()
+      @livewireStyles() 
       @livewireScripts()
       <script src="{{asset('js/alpine.js')}}" defer></script>
    <style>
@@ -294,7 +295,9 @@
                                 <div class="card">
                                     <div class="card-body p-3 text-center">
                                         <span style="font-size: 30px;">
-                                            <img src="/assets/img/buyairtime.svg" height="50px">
+                                        <!-- <img src="{{asset('frontend/img/growth/images/gettingstarted.png')}}" class="img-fluid animated rounded" alt=""> -->
+
+                                            <img src="{{asset('assets/img/buyairtime.svg')}}" height="50px">
                                         </span>
                                         <div class="h6 m-2 text-dark">Buy Airtime</div>
                                     </div>
@@ -383,7 +386,6 @@
 
 
     </div>
-    @include('user.includes.modal_include.dashboard_modal') 
   
  <div class="footer-wrapper">
     <div class="footer-section f-section-1">
@@ -397,17 +399,116 @@
 </div>
 
 </div>
+<!-- modal for pin confirmation -->
 
+<div class="modal fade" id="pinconfirm" class="" tabindex="-1" role="dialog" aria-labelledby="confirmPinTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-cente#ec4d37" role="document">
+                    <div class="modal-content" style="margin:0px;">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">PIN VALIDATION </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                         <form id="confirm_transaction_pin" >
+                            <!-- {{ csrf_field() }} -->
+
+                            <div class="modal-body">
+                                <div class="container d-flex justify-content-center align-items-center">
+                                    <div class="position-relative">
+                                        {{-- <div class="card p-2 text-center"> --}}
+                                            <h6>Please input your transaction pin</h6>
+                                        
+                                            <div id='otp' class="inputs d-flex flex-row justify-content-center mt-2">
+                                                <input class="m-2 text-center form-control rounded" type="number" id="first"
+                                                    maxlength="1" />
+                                                <input class="m-2 text-center form-control rounded" type="number"
+                                                    id="second" maxlength="1" />
+                                                <input class="m-2 text-center form-control rounded" type="number" id="third"
+                                                    maxlength="1" />
+                                                <input class="m-2 text-center form-control rounded" type="number"
+                                                    id="fourth" maxlength="1" />
+                                            </div>
+                                            <div class="mt-4"> <button type="submit" 
+                                                    class="btn btn-danger px-4 validate">Validate</button> </div>
+
+                                        {{-- </div> --}}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- modal for pin confirmation -->
+
+            <!-- modal for pin set up -->
+            <div class="modal fade" id="pinValidation" tabindex="-1" role="dialog" aria-labelledby="pinValidationTitle"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-center" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">SET UP YOUR PIN</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div class="container height-100 d-flex justify-content-center align-items-center">
+                                <div class="position-relative">
+                                    <div class="card p-2 text-center">
+                                        <h6>Please set up your transaction pin</h6>
+                                        <div> </div>
+                                        <form id='submitpin'>
+                                            <div id='potp' class="inputs d-flex flex-row justify-content-center mt-2">
+                                                <input class="m-2 text-center form-control rounded" type="number"
+                                                    id="pfirst" maxlength="1" />
+                                                <input class="m-2 text-center form-control rounded" type="number"
+                                                    id="psecond" maxlength="1" />
+                                                <input class="m-2 text-center form-control rounded" type="number"
+                                                    id="pthird" maxlength="1" />
+                                                <input class="m-2 text-center form-control rounded" type="number"
+                                                    id="pfourth" maxlength="1" />
+                                            </div>
+                                            <input class='form-control' disabled id='pin_email' type='email'
+                                                value='{{ Auth::user()->email }}'>
+                                            <div class="mt-4"> <button type='submit'
+                                                    class="btn btn-danger px-4 validate">Submit</button> </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- modal for pin set up -->
 
 
 <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function(event) {
+
+function OTPInput() {
+const inputs = document.querySelectorAll('#otp > *[id]');
+for (let i = 0; i < inputs.length; i++) { inputs[i].addEventListener('keydown', function(event) { if (event.key==="Backspace" ) { inputs[i].value='' ; if (i !==0) inputs[i - 1].focus(); } else { if (i===inputs.length - 1 && inputs[i].value !=='' ) { return true; } else if (event.keyCode> 47 && event.keyCode < 58) { inputs[i].value=event.key; if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } else if (event.keyCode> 64 && event.keyCode < 91) { inputs[i].value=String.fromCharCode(event.keyCode); if (i !==inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } } }); } } OTPInput(); });
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
 
 function POTPInput() {
 const pinputs = document.querySelectorAll('#potp > *[id]');
 for (let i = 0; i < pinputs.length; i++) { pinputs[i].addEventListener('keydown', function(event) { if (event.key==="Backspace" ) { pinputs[i].value='' ; if (i !==0) pinputs[i - 1].focus(); } else { if (i===pinputs.length - 1 && pinputs[i].value !=='' ) { return true; } else if (event.keyCode> 47 && event.keyCode < 58) { pinputs[i].value=event.key; if (i !==pinputs.length - 1) pinputs[i + 1].focus(); event.preventDefault(); } else if (event.keyCode> 64 && event.keyCode < 91) { pinputs[i].value=String.fromCharCode(event.keyCode); if (i !==pinputs.length - 1) pinputs[i + 1].focus(); event.preventDefault(); } } }); } } POTPInput(); });
-
 </script>
+
+
+
 <!-- main page script -->
 <script src="{{ asset('adminasset/assets/js/libs/jquery-3.1.1.min.js')}}"></script>
 <script src="{{ asset('adminasset/bootstrap/js/popper.min.js')}}"></script>
@@ -417,7 +518,12 @@ for (let i = 0; i < pinputs.length; i++) { pinputs[i].addEventListener('keydown'
 
 
 <script src="{{ asset('adminasset/plugins/highlight/highlight.pack.js')}}"></script>
-@yield('app_init')
+
+<script>
+$(document).ready(function() {
+    App.init();
+});
+</script>
 <script src="{{ asset('adminasset/assets/js/custom.js')}}"></script>
 <!-- END GLOBAL MANDATORY SCRIPTS -->
 
@@ -427,6 +533,9 @@ for (let i = 0; i < pinputs.length; i++) { pinputs[i].addEventListener('keydown'
 <script src="{{ asset('adminasset/plugins/jquery-step/custom-jquery.steps.js')}}"></script>
 <script src='cdn/sweetalert.min.js'></script>
 <!-- To add other script that doesn't have effect on other pages -->
-@section('custom_script')
 
-@show
+@include('user.includes.js_include.pin_js') 
+
+@yield('custom_script')
+
+@stack('script')

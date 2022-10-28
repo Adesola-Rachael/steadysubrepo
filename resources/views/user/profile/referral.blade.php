@@ -107,13 +107,16 @@
                                                 <div class="col-sm-6">
                                                     <div class="alert alert-success" role="alert">
                                                         <p><strong> Your Referals </strong></p>
-                                                        <h1>0</h1>
+                                                        <h1>{{ $referral->count()}}</h1>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="alert alert-success" role="alert">
                                                         <p><strong> Amount Earned </strong></p>
-                                                        <h1>#0</h1>
+                                                        <h1>
+                                                            # {{$referral->count() *200}}
+
+                                                        </h1>
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,7 +129,7 @@
                                                 <div class="table-responsive">
                                                     <table id="zero-config" class="table table-hover dataTable">
                                                     @if(!$referral->isEmpty())
-                                                        style="width: 100%;" role="grid" aria-describedby="default-ordering_info">
+                                                        <!-- style="width: 100%;" role="grid" aria-describedby="default-ordering_info"> -->
                                                         <thead>
                                                             <tr role="row">
                                                                 <th class="sorting" tabindex="0" aria-controls="default-ordering"
@@ -149,7 +152,7 @@
                                                             @foreach($referral as $referrals)
                                                                 <tr role="row">
                                                                     <td>{{$referrals->name}}</td>
-                                                                    <td>100</td>
+                                                                    <td>200</td>
                                                                     <td>{{ Date('d-M,y | H:i:s',strtotime($referrals->created_at ))}}</td>
                                                                 </tr>
                                                             @endforeach
@@ -201,7 +204,7 @@
         var copyShareUrl = copy(shareUrl);
 
         // Set value via markup or JS 
-        shareUrl.value = "{{url('register?referral_id='.auth()->user()->referral_link)}}";
+        shareUrl.value = "{{url('register?referral_link='.auth()->user()->referral_link)}}";
 
         // Click listener with copyShareUrl handler
         shareUrl.addEventListener('click', copyShareUrl, false);

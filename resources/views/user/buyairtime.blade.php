@@ -1,6 +1,6 @@
 @extends('user.layouts.app')
 @section('custom_style')
-<link href="{{ asset('adminasset/assets/css/users/user-profile.css')}}" rel="stylesheet" type="text/css" />
+<!-- <link href="{{ asset('adminasset/assets/css/users/user-profile.css')}}" rel="stylesheet" type="text/css" /> -->
 @endsection
 
 
@@ -17,7 +17,8 @@
                     </div>
                 </div>
             </div>
-            <form id='buy_airtime'>
+            <form id='buy_airtime' method="post">
+            
                 <div class="widget-content col-md-12">
                     <p class="">Phone Number</p>
                     <div class="input-group mb-4">
@@ -34,8 +35,8 @@
                             </button>
 
                         </div>
-                        <input required minlength="10" type="number" id='phone' class="form-control"
-                            placeholder="Phone Number" aria-label="Phone Number" minlength="8">
+                        <input required   maxlength="4"  type="number" name='phone'  id='phone'  class="form-control"
+                            placeholder="Phone Number" aria-label="Phone Number" >
                     </div>
                     <p class="">Select Network</p>
                      <div class="input-group mb-4">
@@ -52,7 +53,7 @@
                             </button>
 
                         </div>
-                        <select required minlength="10" type="number" id='network' class="form-control">
+                        <select required minlength="10" type="number" name='network' id='network' class="form-control">
                             <option value=''>--select network--</option>
                             <option value='MTN'>MTN</option>
                             <option value='AIRTEL'>AIRTEL</option>
@@ -61,7 +62,7 @@
                             </select>
                     </div>
                     <small class='badge badge-success' id='phonesmall'></small>
-                    <input type='hidden' value='{{ Auth::user()->id }}' id='user_id' />
+                    <!-- <input type='hidden' value='{{ Auth::user()->id }}' id='user_id' /> -->
                     <p class="">Amount</p>
                     <div class="input-group mb-4">
                         <div class="input-group-prepend">
@@ -77,7 +78,7 @@
                             </button>
 
                         </div>
-                        <input required type="number" min='100' id='amount' class="form-control"
+                        <input required type="number" min='100' name='amount'  id='amount' class="form-control"
                             placeholder="Airtime Amount" aria-label="Amount">
 
                     </div>
@@ -97,8 +98,10 @@
 
     </div>
 </div>
-<div>
+<!-- <div> -->
 
+
+          
 
 
 @endsection
@@ -106,5 +109,69 @@
 
 
 @section('custom_script')
+<script>
+     $(document).ready(function (){
+        $("#buy_airtime").on("submit",async function(e) {
+            e.preventDefault();
+            
+            if($("#phone").val().length ==11) {
+        
+                const willUpdate = await Swal.fire({
+                    title: "Confirm Transaction"
+                    , text: `Are you sure you want to purchase airtime on ` + $("#phone").val()
+                    , icon: "warning"
+                    , confirmButtonColor: "#DD6B55"
+                    , confirmButtonText: "Yes!"
+                    , showCancelButton: true
+                    , buttons: ["Cancel", "Yes, Proceed"]
+                });
 
+                if (willUpdate.isDismissed == false) {
+                    $("#buy_btn").attr('disabled',true)
+
+                    $("#pinconfirm").modal('show')
+                    
+                }else{
+                    Swal.fire("Transaction declined  :)");
+
+                }
+            }else{
+                Swal.fire('Opps','Incorrect phone number','error')
+
+            }
+                
+        });
+        
+    });
+
+    function buy(){
+            $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                'phone': $('#phone').val(),
+                'network': $('#network').val(),
+                'amount': $('#amount').val(),
+                "_token": "{{ csrf_token() }}",
+            },
+            url: '/postairtime',
+            }).done(function(response) {
+                if(response.status=='success'){
+                    swal.fire('Success!', response.message)
+                }else{
+                    swal.fire('Error!', response.message)
+
+                }
+            });
+      
+
+
+        }
+
+           
+</script>
+
+<script>
+    // 
+</script>
 @endsection
