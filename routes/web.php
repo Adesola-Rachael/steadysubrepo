@@ -22,7 +22,7 @@ Auth::routes();
 Route::any('/sendmail', [App\Http\Controllers\UserController::class, 'sendmail'])->name('sendmail');
 Route::get('/email/verify',[App\Http\Controllers\VerificationController::class, 'show'])->name('verification.notice');
 Route::get('/email/verify/{id}/{hash}', [App\Http\Controllers\VerificationController::class, 'verify'])->name('verification.verify')->middleware(['signed']);
-Route::post('/email/resend', [App\Http\Controllers\VerificationController::class, 'resend'])->name('verification.resend');
+Route::post('/email/resend', [App\Http\Controllers\VerificationController::class, 'resend'])->name('verification.resend'); 
 Route::get('/verify', [App\Http\Controllers\VerificationController::class, 'verifypage']);
 
 // frontend controller
@@ -53,7 +53,8 @@ Route::get('/referral', [App\Http\Controllers\UserController\Account\ReferralCon
 // user transaction pin route
 Route::any('/setpin', [App\Http\Controllers\UserController\Account\PinController::class, 'setpin'])->name('setpin');
 Route::any('/storepin', [App\Http\Controllers\UserController\Account\PinController::class, 'storepin'])->name('storepin');
-// Route::post('/mypin', [App\Http\Controllers\UserController\Account\PinController::class, 'mypin'])->name('mypin');
+Route::any('/updatepin', [App\Http\Controllers\UserController\Account\PinController::class, 'updatepin'])->name('updatepin');
+Route::any('/checkpin', [App\Http\Controllers\UserController\Account\PinController::class, 'checkpin'])->name('checkpin');
 
 Route::post('/changepin', [App\Http\Controllers\UserController\Account\PinController::class, 'changepin'])->name('changepin');
 Route::any('/pin', [App\Http\Controllers\UserController\Account\PinController::class, 'pin'])->name('pin');

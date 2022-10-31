@@ -38,7 +38,7 @@
                         </div>
                         <input type='hidden' id='user_id' value="{{ Auth::user()->id }}" />
                         <input required type="number" id='phone' class="form-control" placeholder="Phone Number"
-                            aria-label="Phone Number" max="11">
+                            aria-label="Phone Number" >
 
                     </div>
                     <small class='badge badge-success' id='phonesmall'></small>

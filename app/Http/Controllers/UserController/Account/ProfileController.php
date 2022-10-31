@@ -13,6 +13,18 @@ class ProfileController extends Controller
 {
     public function getprofile()
     {
+
+        $users=User::where('referred_by',auth()->user()->referral_link)->get();
+        $data['transactions']=User::find(auth()->user()->id)->transactions()->latest()->take(2)->get();
+        $data['referred']=$users->count();
+        $data['referral_amount']=$users->where('spent','!=','0')->count()*200;
+
+        // $users=User::where('referred_by',auth()->user()->referral_id)->get();
+        // $data['transactions']=User::find(auth()->user()->id)->transactions()->latest()->take(2)->get();
+        // $data['referred']=$users->count();
+        // $data['referral_amount']=$users->where('spent','!=','0')->count()*200;
+        // return view('main.account.profile',$data);
+
         $data['alerts'] = Alert::latest()->get();
 
         $data['pagename']='profile';

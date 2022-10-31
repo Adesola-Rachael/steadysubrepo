@@ -17,6 +17,10 @@ class ReferralController extends Controller
         $data['alerts'] = Alert::latest()->get();
 
         $data['pagename']='Referrals';
+        $users=User::where('referred_by',auth()->user()->referral_link)->get();
+        $data['referred']=$users->count();
+
+        
 
         return view('user.profile.referral', $data);
     }

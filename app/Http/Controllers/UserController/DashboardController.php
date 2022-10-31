@@ -22,27 +22,5 @@ class DashboardController extends Controller
         $data['transactions'] = Transaction::where('user_id', auth()->user()->id)->get();
         return view('user.dashboard',$data);
     }
-
-    public function checkpin(Request $request)
-    {
-        $pin = Auth::user()->pin;
-        if ($pin == null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public function updatepin(Request $request)
-    {
-        $user = Auth::user();
-        $user_pin = '';
-        $user_pin .= $request->first;
-        $user_pin .= $request->second;
-        $user_pin .= $request->third;
-        $user_pin .= $request->fourth;
-        $pin1 = (int)$user_pin;
-
-        $user->pin = $pin1;
-        $user->save();
-    }
+    
 }

@@ -107,16 +107,15 @@
                                                 <div class="col-sm-6">
                                                     <div class="alert alert-success" role="alert">
                                                         <p><strong> Your Referals </strong></p>
-                                                        <h1>{{ $referral->count()}}</h1>
+                                                        <h1>{{$referred}}   </h1>                                                      
+
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <div class="alert alert-success" role="alert">
                                                         <p><strong> Amount Earned </strong></p>
-                                                        <h1>
-                                                            # {{$referral->count() *200}}
+                                                        <h1>{{$referred *200}}</h1>
 
-                                                        </h1>
                                                     </div>
                                                 </div>
                                             </div>

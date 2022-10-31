@@ -35,8 +35,8 @@
                             </button>
 
                         </div>
-                        <input required   maxlength="4"  type="number" name='phone'  id='phone'  class="form-control"
-                            placeholder="Phone Number" aria-label="Phone Number" >
+                        <input required  type="tel" name='phone'  id='phone' pattern="[0-9]{11}"  class="form-control"
+                            placeholder="Phone Number" aria-label="Phone Number">
                     </div>
                     <p class="">Select Network</p>
                      <div class="input-group mb-4">
@@ -157,6 +157,7 @@
             url: '/postairtime',
             }).done(function(response) {
                 if(response.status=='success'){
+                
                     swal.fire('Success!', response.message)
                 }else{
                     swal.fire('Error!', response.message)

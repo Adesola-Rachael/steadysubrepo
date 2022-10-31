@@ -21,14 +21,14 @@ class PinController extends Controller
         // $data['monnify'] = $mm = $this->reserveAccount();
         return view('user.profile.pin', $data);
     }
-    public function setpin()
-    {
-        $data['alerts'] = Alert::latest()->get();
-        $data['pagename'] = 'Set pin';
+    // public function setpin()
+    // {
+    //     $data['alerts'] = Alert::latest()->get();
+    //     $data['pagename'] = 'Set pin';
 
-        // $data['monnify'] = $mm = $this->reserveAccount();
-        return view('user.setpin', $data);
-    }
+    //     // $data['monnify'] = $mm = $this->reserveAccount();
+    //     return view('user.setpin', $data);
+    // }
     public function storepin(Request $request){
         $value = $request->value;
         $pin = intval($value);
@@ -159,8 +159,32 @@ class PinController extends Controller
 
        // }
 
+       
     }
         
+    public function checkpin(Request $request)
+    {
+        $pin = Auth::user()->pin;
+        if ($pin == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updatepin(Request $request)
+    {
+        $user = Auth::user();
+        $user_pin = '';
+        $user_pin .= $request->first;
+        $user_pin .= $request->second;
+        $user_pin .= $request->third;
+        $user_pin .= $request->fourth;
+        $pin1 = (int)$user_pin;
+
+        $user->pin = $pin1;
+        $user->save();
+    }
 
     public function confirmpin(Request $request){
 
@@ -205,19 +229,19 @@ class PinController extends Controller
             return "not_matched";
         }
     }
-    public function updatepin(Request $request)
-    {
-        $user = Auth::user();
-        $user_pin = '';
-        $user_pin .= $request->first;
-        $user_pin .= $request->second;
-        $user_pin .= $request->third;
-        $user_pin .= $request->fourth;
-        $pin1 = (int)$user_pin;
+    // public function updatepin(Request $request)
+    // {
+    //     $user = Auth::user();
+    //     $user_pin = '';
+    //     $user_pin .= $request->first;
+    //     $user_pin .= $request->second;
+    //     $user_pin .= $request->third;
+    //     $user_pin .= $request->fourth;
+    //     $pin1 = (int)$user_pin;
 
-        $user->pin = $pin1; 
-        $user->save();
-    }
+    //     $user->pin = $pin1; 
+    //     $user->save();
+    // }
     // public function pinreset($slug)
     // {
     //     $data['alerts'] = Alert::latest()->get();

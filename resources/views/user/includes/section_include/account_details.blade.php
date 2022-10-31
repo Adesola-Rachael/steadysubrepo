@@ -10,6 +10,7 @@
             <div class='alert alert-danger'>Please login to your email address to verify your account within the next 24hrs  <a href='/verification_resend' class='btn btn-danger'>Resend</a></div>
             @endif
         </div>
+           
 
         <!-- <div class="layout-px-spacing"> -->
             
@@ -36,65 +37,57 @@
                 
                 <div class="card-body skew-shadow">
                     <template x-if="btn === 'wema'">
-                    <div>
-                        <p class="text-white mt-2 mb-2 pb-2">
-                            <div class="row">
-                                <div class="me-4 col-sm-6">
-                                    <!-- <p class="text-white text-sm opacity-8 mb-0">Account Name</p> -->
-                                    <h6 class="text-white mb-0"> Account Number  </h6>
-                                </div>
-                                <div class="col-sm-6">
-                                    <h6 class="text-white mb-0"> {{ auth()->user()->account_number2}}</h6>
-                                </div>
-                            </div>
-                        </p>
-                        <div class="d-flex">
+                        <div>
+                            <p class="text-white text-sm opacity-8 mb-0" style="color:white">Account Number</p>
+                            <h5 class="text-white mb-3 pb-2" style="color:white">
+                            {{ auth()->user()->account_number2}}
+                            </h5>
+                                
                             <div class="d-flex">
                                 <div class="row">
-                                    <div class="me-4 col-sm-6">
-                                    <p class="text-white mb-0">Account Name</p>
-                                    <h6 class="text-white mb-0"> {{auth()->user()->account_name2 }} </h6>
+                                    <div class="col-sm-6">
+                                        <div class="me-4">
+                                            <p class="text-white text-sm opacity-8 mb-0">Account Name</p>
+                                            <h6 class="text-white mb-0"> {{ auth()->user()->account_name2}}</h6>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6">
-                                    <p class="text-white mb-0">Bank Name</p>
-                                    <h6 class="text-white mb-0"> {{ auth()->user()->bank_name2 }}</h6>
+                                        <div>
+                                            <p class="text-white text-sm opacity-8 mb-0">Bank Name</p>
+                                            <h6 class="text-white mb-0"> {{ auth()->user()->bank_name2 }}</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </template>
                     <!-- account 2 -->
+                    
                     <template x-if="btn === 'moniepoint'">
-                    <div>
-                            <p class="text-white mt-2 mb-2 pb-2">
+                        <div>
+                            <p class="text-white text-sm opacity-8 mb-0" style="color:white">Account Number</p>
+                            <h5 class="text-white mb-3 pb-2" style="color:white">
+                            {{ auth()->user()->account_number1}}
+                            </h5>
+                                
+                            <div class="d-flex">
                                 <div class="row">
-                                    <div class="me-4 col-sm-6">
-                                        <!-- <p class="text-white text-sm opacity-8 mb-0">Account Name</p> -->
-                                        <h6 class="text-white mb-0"> Account Number  </h6>
+                                    <div class="col-sm-6">
+                                        <div class="me-4">
+                                            <p class="text-white text-sm opacity-8 mb-0">Account Name</p>
+                                            <h6 class="text-white mb-0"> {{ auth()->user()->account_name1}}</h6>
+                                        </div>
                                     </div>
                                     <div class="col-sm-6">
-                                        <h6 class="text-white mb-0"> {{ auth()->user()->account_number2}}</h6>
+                                        <div>
+                                            <p class="text-white text-sm opacity-8 mb-0">Bank Name</p>
+                                            <h6 class="text-white mb-0"> {{ auth()->user()->bank_name1 }}</h6>
+                                        </div>
                                     </div>
-                                </div>
-                            </p>
-                            <div class="d-flex">
-                                <div class="d-flex">
-                                <div class="row">
-                                    <div class="me-4 col-sm-6">
-                                        <p class="text-white text-sm opacity-8 mb-0">Account Name</p>
-                                        <h6 class="mb-0 text-white"> {{ auth()->user()->account_name1}}</h6>
-                            
-                                    </div>
-                                    <div class="me-4 col-sm-6">
-                                        <p class="text-white text-sm opacity-8 mb-0">Bank Name</p>
-                                        <h6 class="text-white mb-0"> {{ auth()->user()->bank_name1 }}</h6>
-                                    </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
-                    </template >
+                    </template>
                
                 </div> 
             </div>

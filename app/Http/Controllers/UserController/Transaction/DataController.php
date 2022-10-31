@@ -46,7 +46,6 @@ class DataController extends Controller
           return response()->json(["status"=>'error',"message"=>$response['message']]); 
 
       }
-      //  return $response->json();
 
        
     }
